@@ -8,8 +8,8 @@ import java.util.TimerTask;
 public class Server1 implements MqttCallback {
     private final int qos = 1;
     private String topicoDrone = "mqtt/ex1"; // Tópico onde o drone publica os dados
-    private String topicoServidor2 = "mqtt/ex2"; // Tópico do Servidor 2
-    private String topicoServidor3 = "mqtt/ex3"; // Tópico do Servidor 3
+    private String topicoServidor2 = "mqtt/ex2";
+    private String topicoServidor3 = "mqtt/ex3"; // Tópico do Servidor 2// Tópico do Servidor 3
     private MqttClient clienteMqtt;
     private String broker = "tcp://mqtt.eclipseprojects.io:1883";
 
@@ -19,7 +19,7 @@ public class Server1 implements MqttCallback {
 
     public void conectar() throws MqttException {
         String idCliente = MqttClient.generateClientId();
-        System.out.println("[*] ID do Cliente: " + idCliente);
+        System.out.println("[*] ID do Servidor 1: " + idCliente);
 
         MqttConnectOptions opcoesDaConexao = new MqttConnectOptions();
         opcoesDaConexao.setCleanSession(true);
@@ -30,7 +30,7 @@ public class Server1 implements MqttCallback {
         this.clienteMqtt.connect(opcoesDaConexao);
         System.out.println("[*] Conectado!");
 
-        System.out.println("[*] Inscrevendo cliente no tópico do drone: " + topicoDrone);
+        System.out.println("[*] Inscrevendo Servidor 1 no tópico do drone: " + topicoDrone);
         clienteMqtt.subscribe(topicoDrone, qos);
         System.out.println("[*] Inscrito no tópico do drone!");
     }

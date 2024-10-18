@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public class Server2 implements MqttCallback {
     private final int qos = 1;
-    private String topicoDrone = "mqtt/ex1"; // Tópico onde o drone publica os dados
+    private String topicServer1 = "mqtt/ex2"; // Tópico onde o drone publica os dados
     private String topicoPressao = "mqtt/pressao"; // Tópico do Servidor 2
     private String topicoTempUmid = "mqtt/temumid";
     private String topicoTodos = "mqtt/todos";// Tópico do Servidor 3
@@ -20,7 +20,7 @@ public class Server2 implements MqttCallback {
 
     public void conectar() throws MqttException {
         String idCliente = MqttClient.generateClientId();
-        System.out.println("[*] ID do Cliente: " + idCliente);
+        System.out.println("[*] ID do Servidor 2: " + idCliente);
 
         MqttConnectOptions opcoesDaConexao = new MqttConnectOptions();
         opcoesDaConexao.setCleanSession(true);
@@ -31,9 +31,9 @@ public class Server2 implements MqttCallback {
         this.clienteMqtt.connect(opcoesDaConexao);
         System.out.println("[*] Conectado!");
 
-        System.out.println("[*] Inscrevendo cliente no tópico do drone: " + topicoDrone);
-        clienteMqtt.subscribe(topicoDrone, qos);
-        System.out.println("[*] Inscrito no tópico do drone!");
+        System.out.println("[*] Inscrevendo cliente no tópico do Servidor 1: " + topicServer1);
+        clienteMqtt.subscribe(topicServer1, qos);
+        System.out.println("[*] Inscrito no tópico do Servidor 1!");
     }
 
     public void desconectar() throws MqttException {
@@ -53,7 +53,7 @@ public class Server2 implements MqttCallback {
                         "\n\t[*] QoS: " + mensagem.getQos() + "\n");
 
                 final var message = new String(mensagem.getPayload());
-                DB.db.add(message);
+                DB.Write(message);
 
                 final String[] dados = message.split(", ");
                 // Armazenando os dados em variáveis separadas
@@ -72,8 +72,6 @@ public class Server2 implements MqttCallback {
                 System.out.println("[*] Dados enviados topicos de temp/umi, pressao e todos");
             }
         }, 0, 3000);
-
-
     }
 
     public void connectionLost(Throwable causa) {

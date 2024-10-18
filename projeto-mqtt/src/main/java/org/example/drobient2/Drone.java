@@ -21,7 +21,7 @@ public class Drone {
         System.out.println("[*] Inicializando um publisher...");
         try {
             String idCliente = MqttClient.generateClientId();
-            System.out.println("[*] ID do Cliente: " + idCliente);
+            System.out.println("[*] ID do Drone: " + idCliente);
             clienteMqtt = new MqttClient(broker, idCliente);
 
             MqttConnectOptions opcoesConexao = new MqttConnectOptions();

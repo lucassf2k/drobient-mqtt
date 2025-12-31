@@ -1,7 +1,3 @@
-Aqui está a tradução para o inglês, mantendo a estrutura e a formatação originais:
-
----
-
 # MQTT Drone and Sensors Simulation Project
 
 This project is a simulation of a climate monitoring system that uses the MQTT protocol for communication between a drone, processing servers, and visualization clients.
